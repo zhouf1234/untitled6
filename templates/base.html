@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>主页面模板</title>
+    <style>
+        *{
+            padding:0;
+            margin:0;
+        }
+        .head{
+            height:50px;
+            width:100%;
+            background:blue;
+        }
+        .left{
+            height:1000px;
+            width:20%;
+            background:green;
+            float:left;
+        }
+    </style>
+</head>
+<body>
+{# include方法包含navbar.html这个文件 ，navbar.html里直接执行了导航条#}
+{% include "navbar.html" %}
+<div class="left">这是左侧菜单</div>
+{% block page_content %}
+{% endblock %}
+</body>
+</html>

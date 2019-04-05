@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block page_content %}
+    <table border="1">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>teacher_name</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>林老师</td>
+            </tr>
+             <tr>
+                <td>2</td>
+                <td>安老师</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>dada</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>jojo</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>momo</td>
+            </tr>
+        </tbody>
+    </table>
+{# 静态文件不写死的方法，即使settings的STATIC_URL = '/static/'的static字符随意更改，也不会影响此处引入的#}
+ {# 使用load加载static这个文件 #}
+{% load static %}
+    <img src="{%  static 'img/2.jpg' %}" alt="">
+{# 给static写别名的方法:以下 #}
+{% get_static_prefix %}
+    <img src="{%  static 'img/2.jpg' %}" alt="">{# 会跟静态文件的字符，了解即可这条 #}
+    <img src="{% get_static_prefix %}img/2.jpg" alt="">
+{% endblock %}
+

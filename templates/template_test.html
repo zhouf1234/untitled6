@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>template_test</title>
+</head>
+<body>
+{{ s1 }}
+<hr>
+{#.0是下标#}
+{{ l.0 }}
+
+<hr>
+{# {{ d }},下方通过name或age来获取对应得到值 #}
+{{ d.name}}
+<hr>
+{# {{ l2 }},下方先通过下标，再通过name来获取对应得到值 ，因为views里上传的是name；它还可以通过name做拼接#}
+{{ l2.2.name }}
+{{ l2.1.dream }}
+<hr>
+{# lisa是不存在的变量，最终显示都没有这句话，lili是存在的，显示路径 #}
+{{ lisa|default:"都没有" }}
+{{ lili|default:"有" }}
+<hr>
+{# length获取长度 #}
+{{ l|length }}
+<hr>
+{# 获取字节大小，此次120kb ；转换成我们可读的大小#}
+{{ filesize|filesizeformat }}
+<hr>
+{# 字符串切片 #}
+{{ s1|slice:"5:10" }}
+<hr>
+{# {{ now|date}}当前时间日期 #}
+{{ now|date:"Y-m-d H:i:s" }}
+<hr>
+{# 加了safe可以点击连接，是安全的字符串 #}
+{{ s2|safe }}
+<hr>
+{# 实例化，使写什么都是字符串 #}
+{{ s3 }}
+<hr>
+{# 参数：截断的字符数,省略号也算三个 ，例如评论缩略显示#}
+{{ s4|truncatechars:15 }}
+<hr>
+{# lode路径导入app01_tags.py这个文件后执行其函数s8，替换s1的dandan这个字符串#}
+{% load app01_tags %}
+{{ s1|s8:"dandan" }}
+<hr>
+{# lode路径导入app01_tags.py这个文件后执行其函数add_age，格式化输出d的age#}
+{{ d.age|add_age}}
+<hr>
+<ul>
+    {% for name in l %}
+       {# 上方的views的l可改:存在则输出，不存在则输出：什么都没有查询到；for ... empty循环#}
+        <li>{{ name }}</li>
+    {% empty %}
+        <li>什么都没有查询到</li>
+    {% endfor %}
+</ul>
+<hr>
+{# 输出结果为：Coco的梦想是成为明星；引入l2的2，函数dream拼接实例化，输出变量mengxiang#}
+{% with l2.2.dream as mengxiang %}
+    {{ mengxiang }}
+{% endwith %}
+</body>
+</html>
